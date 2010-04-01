@@ -229,7 +229,7 @@ html = <<-HTML
   <input type="text" id="input" value="helix" />
 	%WORDS_GO_HERE%
 </div>
-<div id="cy">Based on work by <a href="http://poetry.kedakai.co.uk/helix">Cy Densham</a></div>
+<div id="cy">Based on <a href="http://helix.byJP.me">work</a> by <a href="http://poetry.byJP.me">Cy Densham</a></div>
 </body>
 </html>
 HTML
