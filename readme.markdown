@@ -9,7 +9,7 @@ I'm releasing the artwork that is the poetry and this script that generates it u
 means that you can reproduce my version or your own as much as you like under these conditions
 
  * You aren't making money from it
- * You reference the original work (at [helix.byJP.me](http://helix.byJP.me]))
+ * You reference the original work (at [helix.byJP.me](http://helix.byJP.me))
  * You share *your* work under this same licence
 
 Of course, if you'd like to contravene any of these you only need to ask me — this licence is
@@ -37,10 +37,17 @@ The file `random.txt` needs to be filled with random words you like (one per lin
 At the top of `thoughts.rb` you can change `num_random = 4` to any integer, the greater the number
 the more dense the non-thought slots will be. `tags` should be an array of unique integers, these
 are the slots that will be filled with your thoughts, you need to have at least as many tags as you
-do thoughts, elsewise you won't see your final thoughts in the piece. Finally, `slots` is the number of slots that will be created. You can't have more than 99!
+do thoughts, elsewise you won't see your final thoughts in the piece. Finally, `slots` is the number
+of slots that will be created. You can't have more than 99!
 
 All done! Just open up a prompt and run the script:
 
     $ ruby thoughts.rb
 
 You'll have all the files you need created for you :) Have fun!
+
+To Do
+-----
+
+I need to do some tests with the new version of MooTools and make the script download MooTools from their
+site, rather than keeping it in my script -- its probably against their licence!
