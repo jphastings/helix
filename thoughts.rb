@@ -108,71 +108,79 @@ html = <<-HTML
 	<script src="mootools.core.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	function rotate() {
-		if ($('input').get('value').test(/^[0-8]?\\d$|^9[0-8]$/)) {
-			var next = $('input').get('value').toInt() + 1
-		} else {
-			var next = 0;
-		}
-		new Fx.Tween($('input')).start('color',"#555555","#ffffff")
-		$('input').set('value',next)
-		new Fx.Tween($('input')).start('color',"#ffffff","#555555")
-		$('input').fireEvent('keyup')
-		
-	}
-	var interval;
-	var timeout;
-		
-	window.addEvent('domready', function() {
-		$('input').addEvent('keydown',function(m) {
-			if ((m.key.test(/\\D/) && !m.key.test('backspace')) || ($('input').get('value')+m.key).toInt() > 99) {
-				m.stop()
-			}
-		})
-	
-		$('input').addEvent('focus',function() {
-			clearInterval(interval);
-			clearTimeout(timeout);
-		})
-		
-		$('input').addEvent('blur',function() {
-			if ($('input').get('value') == '') {
-				$('input').setStyle('color',"#ffffff")
-				$('input').set('value',"helix") 
-				new Fx.Tween($('input')).start('color',"#555555")
-			}
-			clearInterval(interval);
-			clearTimeout(timeout);
-			timeout = setTimeout('interval = setInterval(\\'rotate()\\',6000);',1000);
-		})
-		$('input').addEvent('keyup', function() {
-			var theClass = 'helix_'+this.get('value')
-			var amt;
-			$$('#helix span').each(function(el){
-				if (el.hasClass(theClass)) {
-					amt = "#000000";
-				} else {
-					amt = "#d4d4d4";
-				}
-				new Fx.Tween(el).start('color',amt)
-			})
-		})
-		$('input').addEvent('mousedown', function() {
-			$$('#helix span').each(function(el){
-				new Fx.Tween(el).start('color',"#999999")
-			})
-			this.set('value','')
-		})
-		
-		
-		var start = document.location.href.replace(/.*#(\\d{1,2})$/,'$1')
-		if (start != document.location.href) {
-			$('input').set('value',start)
-			$('input').fireEvent('keyup')
-			clearTimeout(timeout);
-		}
-	});
-	
-	timeout = setTimeout('interval = setInterval(\\'rotate()\\',12000);',15000);
+  		if ($('input').get('value').test(/^[0-8]?\d$|^9[0-8]$/)) {
+  			var next = $('input').get('value').toInt() + 1
+  		} else {
+  			var next = 0;
+  		}
+  		new Fx.Tween($('input')).start('color',"#555555","#ffffff")
+  		$('input').set('value',next)
+  		new Fx.Tween($('input')).start('color',"#ffffff","#555555")
+  		$('input').fireEvent('keyup')
+
+  	}
+  	var interval;
+  	var timeout;
+
+  	var s = {1:'d66e25',2:'4e93fb',3:'222255',4:'7dad17',5:'ad0e19'}
+
+  	window.addEvent('domready', function() {
+  		$('input').addEvent('keydown',function(m) {
+  			if ((m.key.test(/\D/) && !m.key.test('backspace')) || ($('input').get('value')+m.key).toInt() > 99) {
+  				m.stop()
+  			}
+  		})
+
+  		$('input').addEvent('focus',function() {
+  			clearInterval(interval);
+  			clearTimeout(timeout);
+  		})
+
+  		$('input').addEvent('blur',function() {
+  			if ($('input').get('value') == '') {
+  				$('input').setStyle('color',"#ffffff")
+  				$('input').set('value',"kierre") 
+  				new Fx.Tween($('input')).start('color',"#555555")
+  			}
+  			clearInterval(interval);
+  			clearTimeout(timeout);
+  			timeout = setTimeout('interval = setInterval(\'rotate()\',6000);',1000);
+  		})
+  		$('input').addEvent('keyup', function() {
+  			var theClass = 'helix_'+this.get('value')
+  			var amt;
+  			$$('#helix span').each(function(el){
+  				if (el.hasClass(theClass)) {
+  					v = el.get('rel');
+  					if (v == undefined) {
+  						amt = '#000000';
+  					} else {
+  						amt = '#'+ s[v];
+  						el.setStyle('text-shadow','#'+s[v]+' 0px 0px 10px')
+  					}
+  				} else {
+  					amt = "#d4d4d4";
+  				}
+  				new Fx.Tween(el).start('color',amt)
+  			})
+  		})
+  		$('input').addEvent('mousedown', function() {
+  			$$('#helix span').each(function(el){
+  				new Fx.Tween(el).start('color',"#999999")
+  			})
+  			this.set('value','')
+  		})
+
+
+  		var start = document.location.href.replace(/.*#(\d{1,2})$/,'$1')
+  		if (start != document.location.href) {
+  			$('input').set('value',start)
+  			$('input').fireEvent('keyup')
+  			clearTimeout(timeout);
+  		}
+  	});
+
+  	timeout = setTimeout('interval = setInterval(\'rotate()\',12000);',15000);
 		</script>
 	<style>
 	body {
@@ -191,12 +199,36 @@ html = <<-HTML
 	}
 	
 	#cy {
-	  position:fixed;
-	  bottom:2px;
-	  right: 5px;
-	  color: #bbb;
-	  font-size:10px;
+  	text-align:center;
+  	display:block;
+  	color:#eee;
+  	font-size:0.8em;
+  	text-decoration:none;
+  	margin-top:25px;
+  	font-style:italic;
+  }
+
+	#cy p {
+		color:#ccc;
+		margin:0;
+		font-style:normal;
 	}
+
+	#cy a {
+		color:#ddd;
+		text-decoration:none;
+	}
+
+
+	#cy p a {
+		color:#bbb;
+	}
+
+	#cy a:hover {
+		color: #222;
+		text-decoration:underline;
+	}
+  
 	
 	a {
 	  text-decoration: none;
@@ -229,7 +261,7 @@ html = <<-HTML
   <input type="text" id="input" value="helix" />
 	%WORDS_GO_HERE%
 </div>
-<div id="cy">Based on <a href="http://helix.byJP.me">work</a> by <a href="http://poetry.byJP.me">Cy Densham</a></div>
+<div id="cy"><p>Penned by <a href="http://google.com">YOUR NAME HERE</a></p>based on <a href="http://helix.byJP.me">work</a> by <a href="http://poetry.byJP.me">Cy Densham</a></div>
 </body>
 </html>
 HTML
